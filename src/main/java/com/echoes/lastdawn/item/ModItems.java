@@ -3,7 +3,7 @@ package com.echoes.lastdawn.item;
 import com.echoes.lastdawn.EchoesMod;
 import com.echoes.lastdawn.entity.ModEntities;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,7 +23,7 @@ public final class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> STORY_KEEPER_SPAWN_EGG = ITEMS.register("story_keeper_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.STORY_KEEPER.get(), 0x26364A, 0x8E7BD1, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(ModEntities.STORY_KEEPER, 0x26364A, 0x8E7BD1, new Item.Properties()));
 
     private ModItems() {}
 
