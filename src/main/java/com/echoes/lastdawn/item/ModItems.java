@@ -23,7 +23,7 @@ public final class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> STORY_KEEPER_SPAWN_EGG = ITEMS.register("story_keeper_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.STORY_KEEPER, 0x26364A, 0x8E7BD1, new Item.Properties()));
+            () -> new SpawnEggItem(ModEntities.STORY_KEEPER.get(), 0x26364A, 0x8E7BD1, new Item.Properties()));
 
     private ModItems() {}
 
