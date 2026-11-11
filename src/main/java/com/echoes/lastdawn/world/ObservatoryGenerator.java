@@ -116,13 +116,19 @@ public final class ObservatoryGenerator {
                 for (int dz = -radius; dz <= radius; dz += 4) {
                     int px = center.getX() + dx;
                     int pz = center.getZ() + dz;
-                    BlockPos surface = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, px, pz);
-                    if (level.getFluidState(surface).isEmpty() && level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
+                    // In Minecraft 1.20.1, getHeight(...) returns the Y coordinate (int),
+                    // not a BlockPos. Convert that height into a position at this X/Z.
+                    int surfaceY = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, px, pz);
+                    BlockPos surface = new BlockPos(px, surfaceY, pz);
+                    BlockPos ground = surface.below();
+                    if (level.getFluidState(surface).isEmpty()
+                            && level.getBlockState(ground).isSolidRender(level, ground)) {
                         return surface;
                     }
                 }
             }
         }
-        return level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center.getX(), center.getZ());
+        int surfaceY = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center.getX(), center.getZ());
+        return new BlockPos(center.getX(), surfaceY, center.getZ());
     }
 }
